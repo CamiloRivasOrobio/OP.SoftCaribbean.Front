@@ -1,0 +1,112 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div>
+        <form novalidate #f="ngForm" [formGroup]="form">
+            <div class="row" style="overflow:auto;">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de documento: </mat-label>
+                        <mat-select required id="cddocumento" name="cddocumento" formControlName="cddocumento"
+                            style="width: 100% !important;" [disabled]="this.modificar == 2">
+                            <mat-option [value]="documento.nmdato" *ngFor="let documento of documentos; let i = index">
+                                {{documento.nmdato}} - {{documento.dsddato}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero de documento: </mat-label>
+                        <input matInput #nmid name="nmid" type="number" formControlName="nmid" required [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombres: </mat-label>
+                        <input matInput #dsnombres name="dsnombres" formControlName="dsnombres" required [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Apellidos: </mat-label>
+                        <input matInput #dsapellidos name="dsapellidos" formControlName="dsapellidos" required [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha naciemiento: </mat-label>
+                        <input matInput #fenacimiento type="date" name="fenacimiento" formControlName="fenacimiento"
+                            required [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de persona: </mat-label>
+                        <mat-select required id="cdtipo" name="cdtipo" formControlName="cdtipo"
+                            style="width: 100% !important;" [disabled]="this.modificar == 2">
+                            <mat-option [value]="tipopersona.nmdato"
+                                *ngFor="let tipopersona of tipopersonas; let i = index">
+                                {{tipopersona.nmdato}} - {{tipopersona.dsddato}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Genero: </mat-label>
+                        <mat-select required id="cdgenero" name="cdgenero" formControlName="cdgenero"
+                            style="width: 100% !important;" [disabled]="this.modificar == 2">
+                            <mat-option [value]="sexo.nmdato" *ngFor="let sexo of sexos; let i = index">
+                                {{sexo.nmdato}} - {{sexo.dsddato}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Usuario: </mat-label>
+                        <input matInput #cdusuario name="cdusuario" formControlName="cdusuario" required [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Direccion: </mat-label>
+                        <input matInput #dsdireccion name="dsdireccion" formControlName="dsdireccion" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefono fijo: </mat-label>
+                        <input matInput #cdtelefonoFijo name="cdtelefonoFijo" formControlName="cdtelefonoFijo" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefono movil: </mat-label>
+                        <input matInput #cdtelefonoMovil name="cdtelefonoMovil" formControlName="cdtelefonoMovil" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email: </mat-label>
+                        <input matInput #dsemail type="email" name="dsemail" formControlName="dsemail" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" *ngIf="this.modificar != 2">
+                <div class="col-md-6">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button color="warn"
+                        mat-button mat-dialog-close>Cancelar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 0">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(0)">Registrar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 1">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(1)">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

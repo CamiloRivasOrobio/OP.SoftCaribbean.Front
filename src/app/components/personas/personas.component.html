@@ -1,0 +1,60 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 space"></div>
+        <div class="col-md-3 space">
+            <button type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                (click)="this.OpenFormDialog(0, 0);">
+                Registrar nueva persona
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+        <div class="wrapper table-responsive">
+            <table class="table" *ngIf="this.personas.length > 0">
+                <thead class="table-dark align-middle">
+                    <tr>
+                        <th scope="col">Documento</th>
+                        <th scope="col">T. documento</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">F. nacimiento</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let persona of personas; let i = index">
+                        <th scope="row">{{persona.nmid}}</th>
+                        <td>{{personas[i].documentoNavigation.dsddato}}</td>
+                        <td>{{persona.dsnombres}}</td>
+                        <td>{{persona.dsapellidos}}</td>
+                        <td>{{persona.fenacimiento | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{personas[i].tipoNavigation.dsddato}}</td>
+                        <td>{{personas[i].generoNavigation.dsddato}}</td>
+                        <td>{{persona.dsemail}}</td>
+                        <td>
+                            <button (click)="this.DeletePeople(persona.nmid);" type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(persona.nmid, 0)" type="button" class="btn btn-primary"
+                                style="margin: 0px 6px 0px 6px;"><i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(persona.nmid, 1)" type="button" class="btn btn-success">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="this.personas.length > 0">
+                <mat-paginator [length]="this.totalItems" [pageSize]="this.pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                    aria-label="Select page" (page)="ChangePage($event);">
+                </mat-paginator>
+            </div>
+            <label style="text-align:center;width:100%;" *ngIf="this.personas.length === 0">No se encuentran
+                datos.</label>
+        </div>
+    </div>
+</div>

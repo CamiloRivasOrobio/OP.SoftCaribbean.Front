@@ -1,0 +1,9 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<button type="button" style="width: 49%; margin: 7px 1% 0px 0px;" class="btn btn-danger" (click)="this.downloadPDF();">
+    Exportar a PDF
+    <i class="fa-solid fa-file-pdf"></i>
+</button>
+<button type="button" style="width: 49%; margin-top: 7px;" class="btn btn-success" (click)="this.exportAsXLSX();">
+    Exportar a Excel
+    <i class="fa-solid fa-file-excel"></i>
+</button>

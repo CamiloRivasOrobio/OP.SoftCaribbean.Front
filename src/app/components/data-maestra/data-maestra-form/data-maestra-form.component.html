@@ -1,0 +1,65 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div>
+        <form novalidate #f="ngForm" [formGroup]="form">
+            <div class="row" style="overflow:auto;">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Dato: </mat-label>
+                        <input matInput #nmdato name="nmdato" formControlName="nmdato" required
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Codigo dato: </mat-label>
+                        <input matInput #cddato name="cddato" formControlName="cddato" required
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Descripción: </mat-label>
+                        <input matInput #dsddato name="dsddato" formControlName="dsddato" required
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Codigo dato 1: </mat-label>
+                        <input matInput #cddato1 name="cddato1" formControlName="cddato1"
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Codigo dato 2: </mat-label>
+                        <input matInput #cddato2 name="cddato2" formControlName="cddato2"
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Codigo dato 3: </mat-label>
+                        <input matInput #cddato3 name="cddato3" formControlName="cddato3"
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" *ngIf="this.modificar != 2">
+                <div class="col-md-6">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button color="warn"
+                        mat-button mat-dialog-close>Cancelar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 0">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(0)">Registrar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 1">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(1)">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

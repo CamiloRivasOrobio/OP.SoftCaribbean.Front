@@ -1,0 +1,77 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div>
+        <form novalidate #f="ngForm" [formGroup]="form">
+            <div class="row" style="overflow:auto;">
+                <!-- <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero de documento: </mat-label>
+                        <input matInput #nmid name="nmid" formControlName="nmid" required
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div> -->
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Paciente: </mat-label>
+                        <mat-select required id="nmidPersona" name="nmidPersona" formControlName="nmidPersona"
+                            style="width: 100% !important;" [disabled]="this.modificar == 2">
+                            <mat-option [value]="persona.nmid" *ngFor="let persona of personas; let i = index">
+                                {{persona.nmid}} - {{persona.dsnombres}} {{persona.dsapellidos}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Medico: </mat-label>
+                        <mat-select required id="nmidMedicotra" name="nmidMedicotra" formControlName="nmidMedicotra"
+                            style="width: 100% !important;" [disabled]="this.modificar == 2">
+                            <mat-option [value]="medico.nmid" *ngFor="let medico of medicos; let i = index">
+                                {{medico.nmid}} - {{medico.dsnombres}} {{medico.dsapellidos}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Eps: </mat-label>
+                        <input matInput #dseps name="dseps" formControlName="dseps" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Arl: </mat-label>
+                        <input matInput #dsarl name="dsarl" formControlName="dsarl" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Usuario: </mat-label>
+                        <input matInput #cdusuario name="cdusuario" formControlName="cdusuario" [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Condición: </mat-label>
+                        <input matInput #dscondicion name="dscondicion" formControlName="dscondicion"
+                            [readonly]="this.modificar == 2">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" *ngIf="this.modificar != 2">
+                <div class="col-md-6">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button color="warn"
+                        mat-button mat-dialog-close>Cancelar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 0">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(0)">Registrar</button>
+                </div>
+                <div class="col-md-6" *ngIf="this.modificar == 1">
+                    <button style="float: right; margin: 5px 0px 5px 0px; width: 100%;" mat-raised-button
+                        color="primary" [disabled]="this.form.invalid" (click)="onSubmit(1)">Modificar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

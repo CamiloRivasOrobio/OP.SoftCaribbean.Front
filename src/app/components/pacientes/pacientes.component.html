@@ -1,0 +1,66 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 space"></div>
+        <div class="col-md-3 space" *ngIf="this.id == null">
+            <button type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                (click)="this.OpenFormDialog(0, 0);">
+                Registrar nueva paciente
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+        <div class="wrapper table-responsive">
+            <table class="table" *ngIf="this.pacientes.length > 0">
+                <thead class="table-dark align-middle">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Persona</th>
+                        <th scope="col">Medico</th>
+                        <th scope="col">EPS</th>
+                        <th scope="col">ARL</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Condición</th>
+                        <th scope="col" *ngIf="this.id == null">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let persona of pacientes; let i = index">
+                        <th scope="row">{{persona.nmid}}</th>
+                        <td>{{pacientes[i].personaNavigation.dsnombres}} {{pacientes[i].personaNavigation.dsapellidos}}
+                        </td>
+                        <td>{{pacientes[i].medicoNavigation.dsnombres}} {{pacientes[i].medicoNavigation.dsapellidos}}
+                        </td>
+                        <td>{{persona.dseps}}</td>
+                        <td>{{persona.dsarl}}</td>
+                        <td>{{persona.cdusuario}}</td>
+                        <td>{{persona.dscondicion}}</td>
+                        <td *ngIf="this.id == null">
+                            <button (click)="this.DeletePeople(persona.nmid);" type="button" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(persona.nmid, 0)" type="button" class="btn btn-primary"
+                                style="margin: 0px 6px 0px 6px;"><i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(persona.nmid, 1)" type="button"
+                                class="btn btn-success">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="this.pacientes.length > 0">
+                <mat-paginator [length]="this.totalItems" [pageSize]="this.pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                    aria-label="Select page" (page)="ChangePage($event);">
+                </mat-paginator>
+            </div>
+            <label style="text-align:center;width:100%;" *ngIf="this.pacientes.length === 0">No se encuentran datos.</label>
+        </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <app-descargar-pdf *ngIf="this.id !== null"></app-descargar-pdf>
+            </div>
+        </div>
+    </div>
+</div>

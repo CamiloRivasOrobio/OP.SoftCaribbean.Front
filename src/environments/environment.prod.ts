@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  rolMedico: 'TRA',
+  rolPaciente: 'PAC'
 };

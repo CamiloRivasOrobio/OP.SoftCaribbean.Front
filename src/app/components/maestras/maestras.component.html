@@ -1,0 +1,57 @@
+<app-spinner-loader *ngIf="this.loading"></app-spinner-loader>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 space"></div>
+        <div class="col-md-3 space">
+            <button type="button" style="width: 100%; margin-bottom: 10px;" class="btn btn-dark"
+                (click)="this.OpenFormDialog('', 0);">
+                Registrar nueva maestra
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
+        <div class="wrapper table-responsive">
+            <table class="table" *ngIf="this.maestras.length > 0">
+                <thead class="table-dark align-middle">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let maestra of maestras; let i = index">
+                        <th scope="row">{{maestra.nmmaestro}}</th>
+                        <td>{{maestra.cdmaestro}}</td>
+                        <td>{{maestra.dsmaestro}}</td>
+                        <td>
+                            <button (click)="this.DeletePeople(maestra.nmmaestro);" type="button"
+                                class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(maestra.nmmaestro, 0)" type="button"
+                                class="btn btn-primary" style="margin: 0px 6px 0px 6px;"><i
+                                    class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button (click)="this.OpenFormDialog(maestra.nmmaestro, 1)" type="button"
+                                class="btn btn-success" style="margin: 0px 6px 0px 0px;"><i
+                                    class="fa-regular fa-eye"></i>
+                            </button>
+                            <button (click)="this.SeletedItem(maestra.nmmaestro)" type="button" class="btn btn-info"><i
+                                    class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="this.maestras.length > 0">
+                <mat-paginator [length]="this.totalItems" [pageSize]="this.pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+                    aria-label="Select page" (page)="ChangePage($event);">
+                </mat-paginator>
+            </div>
+            <label style="text-align:center;width:100%;" *ngIf="this.maestras.length === 0">No se encuentran
+                datos.</label>
+        </div>
+    </div>
+</div>
+<app-data-maestra *ngIf="this.selectedId != ''"></app-data-maestra>
